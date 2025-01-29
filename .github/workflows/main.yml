@@ -1,0 +1,21 @@
+name: macOS Virtualization Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: brew install qemu
+
+      - name: Run Virtual Machine using QEMU (example)
+        run: |
+          qemu-system-x86_64 -hda disk.img -m 4G
