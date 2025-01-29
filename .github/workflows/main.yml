@@ -1,4 +1,4 @@
-name: macOS Virtualization Workflow
+name: macOS Virtualization on Self-Hosted Runner
 
 on:
   push:
@@ -7,15 +7,9 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: self-hosted
 
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: brew install qemu
-
-      - name: Run Virtual Machine using QEMU (example)
+      - name: Start macOS VM
         run: |
-          qemu-system-x86_64 -hda disk.img -m 4G
+          qemu-system-x86_64 -hda macos.qcow2 -m 4G -enable-kvm
